@@ -1,0 +1,1 @@
+Edit the `.env` file and set the project id, Api token, and space url.

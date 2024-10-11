@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>VIDEOCALL</title>
+  <link rel="stylesheet" href="/index.css" />
+
+  <!-- Import Axios library -->
+  <script src="https://cdn.jsdelivr.net/npm/axios@0.24.0/dist/axios.min.js"></script>
+  <!-- Import SignalWire library -->
+  <script src="https://unpkg.com/@signalwire/js@^3.8"></script>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="video_preview.js"></script>
+
+  <!-- Montserrat Font to make it look good -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap"
+          rel="stylesheet"
+  />
+</head>
+
+<body>
+<div class="header">
+  <img src="swlogo.png" id="logo" />
+  <div>SignalWire Video API demo: Room Previews</div>
+</div>
+
+<div class="body">
+  <div class="content">
+    <div id="loading" class="dynamic">Loading ...</div>
+
+    <div id="getusername" class="dynamic">
+      <form onsubmit="event.preventDefault(); joinwithusername();">
+        <input
+                type="text"
+                id="usernameinput"
+                placeholder="Your Name"
+                required
+                minlength="1"
+                maxlength="30"
+                pattern="[^' ']+"
+        /><br />
+        <input
+                type="text"
+                id="roomnameinput"
+                placeholder="Room name"
+                minlength="1"
+                maxlength="30"
+                pattern="[^' ']+"
+        /><br />
+        <input type="submit" value="Join" />
+      </form>
+    </div>
+
+    <div id="videoroom" class="dynamic">
+      Try joining this page from another tab to witness the magic. <br />
+      <div id="root">
+        <!-- Video SDK will inject the video stream here -->
+      </div>
+      <br />
+      <button onclick="hangup()">Leave</button>
+      <button onclick="share_screen()">Share Screen</button>
+
+      <br />
+      <br />
+      <button id="audio_mute">Mute Audio</button>
+      <button id="video_mute">Mute Video</button>
+
+      <select id="camera_select">
+        <option value="" disabled selected hidden>Change Camera</option>
+      </select>
+
+      <select id="microphone_select">
+        <option value="" disabled selected hidden>Change Microphone</option>
+      </select>
+
+      <br />
+
+      <br />
+      <div>Share this link to instantly invite someone:</div>
+      <div id="instant_invite"></div>
+    </div>
+  </div>
+</div>
+
+<div id="room_navigator">
+  <h4>Room Navigator</h4>
+  <template id="room_template">
+    <div class="room_wrapper">
+      <video-preview class="room_preview" refresh-interval="10000">
+        <div class="room_name"></div>
+      </video-preview>
+    </div>
+  </template>
+</div>
+
+<div class="links">
+  <h4>Learn More</h4>
+  <ul>
+    <li>
+      <a href="https://developer.signalwire.com"
+      >SignalWire Developer portal</a
+      >
+    </li>
+  </ul>
+</div>
+
+
+<script src="index.js"></script>
+</body>
+</html>
